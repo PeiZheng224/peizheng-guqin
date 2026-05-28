@@ -1,0 +1,137 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import GuqinSymbol from '../../components/GuqinSymbol.astro';
+import { getCollection } from 'astro:content';
+
+const allWorks = await getCollection('works');
+const works = allWorks
+  .filter(w => w.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const allPerformances = await getCollection('performances');
+const performances = allPerformances
+  .filter(p => p.data.status !== 'past')
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+const pastPerformances = allPerformances
+  .filter(p => p.data.status === 'past')
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const fmtDateZh = (d: Date) => {
+  const months = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  return `${months[d.getMonth()]} ${d.getDate()}`;
+};
+---
+
+<Base title="鄭沛 · Pei Zheng · 古琴" lang="zh">
+  <Nav lang="zh" />
+
+  <section class="hero">
+    <GuqinSymbol />
+    <div class="hero-tag">G U Q I N &nbsp; · &nbsp; 古 琴</div>
+    <p class="hero-quote-zh">以琴观心　明心见性</p>
+    <p class="hero-quote-en">Through the qin, the heart is seen.</p>
+    <div class="hero-divider"></div>
+    <div class="hero-name">PEI ZHENG &nbsp; · &nbsp; 郑 沛</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section" id="works">
+    <div class="section-header">
+      <h2 class="section-title">精选作品</h2>
+      <span></span>
+    </div>
+
+    <div class="works-grid">
+      {works.map(w => (
+        <a
+          class="work-card"
+          href={`https://www.youtube.com/watch?v=${w.data.youtubeId}`}
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="work-thumb">
+            <img
+              src={`https://i.ytimg.com/vi/${w.data.youtubeId}/hqdefault.jpg`}
+              alt={w.data.titleZh || w.data.title}
+              loading="lazy"
+            />
+          </div>
+          <p class="work-title">{w.data.titleZh}</p>
+          <p class="work-meta">{w.data.title} · {w.data.year}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section section-narrow" id="about">
+    <h2 class="section-title" style="margin-bottom: 24px;">关于</h2>
+    <div class="about-layout">
+      <div class="about-body">
+        <p class="about-text">
+          鄭沛，古琴演奏者与教育者，现居美国旧金山湾区。师承梅庵派国际知名琴家吕培原先生，启蒙于黄星老师系统研习古琴，并多次得到贵州省古琴学会会长吴若杰先生指导琴学理论知识。曾于美国多所大学及文化机构举办音乐会、讲座与工作坊。贵州省古琴学会终身会员，中国文化品牌 XinEcho 创始人。致力于通过演奏与教学传播古琴音乐，促进跨文化理解。
+        </p>
+      </div>
+      <div class="about-photo">
+        <img src="/peizheng-guqin/pei-zheng.JPG" alt="郑沛演奏古琴" />
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section section-narrow" id="performances">
+    <h2 class="section-title" style="margin-bottom: 28px;">近期演出</h2>
+    <div class="performances">
+      {performances.map(p => (
+        <div class="performance-row">
+          <span class="performance-date">{fmtDateZh(p.data.date)}</span>
+          <span class="performance-title">{p.data.titleZh || p.data.title}</span>
+          <span class="performance-venue">{p.data.venueZh || p.data.venue}</span>
+          {p.data.status === 'tba' ? (
+            <span class="performance-cta tba">待定</span>
+          ) : p.data.rsvpUrl ? (
+            <a href={p.data.rsvpUrl} class="performance-cta" target="_blank" rel="noopener">预约 →</a>
+          ) : (
+            <span class="performance-cta tba">—</span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {pastPerformances.length > 0 && (
+      <>
+        <h3 class="past-performances-label">往期演出</h3>
+        <div class="performances past">
+          {pastPerformances.map(p => (
+            <div class="performance-row">
+              <span class="performance-date">{fmtDateZh(p.data.date)}</span>
+              <span class="performance-title">{p.data.titleZh || p.data.title}</span>
+              <span class="performance-venue">{p.data.venueZh || p.data.venue}</span>
+              <span class="performance-cta tba">—</span>
+            </div>
+          ))}
+        </div>
+      </>
+    )}
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="contact" id="contact">
+    <p class="contact-lead">演出 · 教学 · 邀约</p>
+    <a href="mailto:pei.zheng.studio@gmail.com" class="contact-mail">pei.zheng.studio@gmail.com</a>
+  </section>
+
+  <div class="bottom-painting">
+    <img src="/peizheng-guqin/bottom_background.jpg" alt="" role="presentation" />
+  </div>
+
+  <Footer />
+</Base>

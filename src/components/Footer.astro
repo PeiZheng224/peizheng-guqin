@@ -1,0 +1,50 @@
+---
+// 页脚 + 社交链接
+// 顺序：Mail · 小红书 · YouTube · Bilibili
+interface Props {
+  email?: string;
+  xhsUrl?: string;
+  youtubeUrl?: string;
+  bilibiliUrl?: string;
+}
+const {
+  email = 'pei.zheng.studio@gmail.com',
+  xhsUrl = 'https://www.xiaohongshu.com/user/profile/5a23ccab11be10044387d17a',
+  youtubeUrl = 'https://www.youtube.com/@GuqinEchoeer',
+  bilibiliUrl = 'https://space.bilibili.com/3481710',
+} = Astro.props;
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 PEI ZHENG · 鄭沛</span>
+    <span class="footer-icons">
+      <a href={`mailto:${email}`} aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <path d="M3 7l9 6 9-6"/>
+        </svg>
+      </a>
+      <a href={xhsUrl} target="_blank" rel="noopener" aria-label="小红书 Xiaohongshu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="4"/>
+          <text x="12" y="16" text-anchor="middle" font-family="serif" font-size="11" font-weight="500" fill="currentColor" stroke="none">小</text>
+        </svg>
+      </a>
+      <a href={youtubeUrl} target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 8.5a3 3 0 0 0-2.1-2.1C18 6 12 6 12 6s-6 0-7.9.4A3 3 0 0 0 2 8.5C1.6 10.4 1.6 12 1.6 12s0 1.6.4 3.5a3 3 0 0 0 2.1 2.1C6 18 12 18 12 18s6 0 7.9-.4a3 3 0 0 0 2.1-2.1c.4-1.9.4-3.5.4-3.5s0-1.6-.4-3.5z"/>
+          <path d="M10 9.5v5l4-2.5-4-2.5z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href={bilibiliUrl} target="_blank" rel="noopener" aria-label="Bilibili">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="7" width="18" height="13" rx="3"/>
+          <path d="M7 4l3 3M17 4l-3 3"/>
+          <circle cx="9" cy="13.5" r="0.8" fill="currentColor"/>
+          <circle cx="15" cy="13.5" r="0.8" fill="currentColor"/>
+        </svg>
+      </a>
+    </span>
+  </div>
+</footer>

@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import GuqinSymbol from '../components/GuqinSymbol.astro';
+import { getCollection } from 'astro:content';
+
+// 读取作品（仅 featured，按 order 升序，取前 3）
+const allWorks = await getCollection('works');
+const works = allWorks
+  .filter(w => w.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+// 读取演出（upcoming + tba，按日期升序）
+const allPerformances = await getCollection('performances');
+const performances = allPerformances
+  .filter(p => p.data.status !== 'past')
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+// 已过去的演出（按日期降序，最近的在前）
+const pastPerformances = allPerformances
+  .filter(p => p.data.status === 'past')
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toUpperCase();
+---
+
+<Base title="Pei Zheng · 鄭沛 · Guqin">
+  <Nav lang="en" />
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <GuqinSymbol />
+    <div class="hero-tag">G U Q I N &nbsp; · &nbsp; 古 琴</div>
+    <p class="hero-quote-zh">以琴观心　明心见性</p>
+    <p class="hero-quote-en">Through the qin, the heart is seen.</p>
+    <div class="hero-divider"></div>
+    <div class="hero-name">PEI ZHENG &nbsp; · &nbsp; 鄭 沛</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== WORKS ===== -->
+  <section class="section" id="works">
+    <div class="section-header">
+      <h2 class="section-title">Selected Works</h2>
+      <span></span>
+    </div>
+
+    <div class="works-grid">
+      {works.map(w => (
+        <a
+          class="work-card"
+          href={`https://www.youtube.com/watch?v=${w.data.youtubeId}`}
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="work-thumb">
+            <img
+              src={`https://i.ytimg.com/vi/${w.data.youtubeId}/hqdefault.jpg`}
+              alt={w.data.title}
+              loading="lazy"
+            />
+          </div>
+          <p class="work-title">{w.data.title}</p>
+          <p class="work-meta">{w.data.titleZh} · {w.data.year}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section section-narrow" id="about">
+    <h2 class="section-title" style="margin-bottom: 24px;">About</h2>
+    <div class="about-layout">
+      <div class="about-body">
+        <p class="about-text">
+          Pei Zheng is a Guqin performer and educator based in the San Francisco Bay Area. She began her formal study of the Guqin under Teacher Huang Xing, and has advanced her artistry under internationally recognized Mei'an-school master Lui Pui-Yuen (吕培原). She has also received guidance on qin theory from Wu Ruojie, President of the Guizhou Guqin Association. She has presented concerts, lectures, and workshops at universities and cultural institutions across the United States. Zheng is a lifetime member of the Guizhou Guqin Association and founder of the Chinese cultural brand XinEcho. Her work focuses on sharing Guqin music and promoting cross-cultural understanding through performance and education.
+        </p>
+      </div>
+      <div class="about-photo">
+        <img src="/peizheng-guqin/pei-zheng.JPG" alt="Pei Zheng playing guqin" />
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== PERFORMANCES ===== -->
+  <section class="section section-narrow" id="performances">
+    <h2 class="section-title" style="margin-bottom: 28px;">Upcoming Performances</h2>
+    <div class="performances">
+      {performances.map(p => (
+        <div class="performance-row">
+          <span class="performance-date">{fmtDate(p.data.date)}</span>
+          <span class="performance-title">{p.data.title}</span>
+          <span class="performance-venue">{p.data.venue}</span>
+          {p.data.status === 'tba' ? (
+            <span class="performance-cta tba">TBA</span>
+          ) : p.data.rsvpUrl ? (
+            <a href={p.data.rsvpUrl} class="performance-cta" target="_blank" rel="noopener">RSVP →</a>
+          ) : (
+            <span class="performance-cta tba">—</span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {pastPerformances.length > 0 && (
+      <>
+        <h3 class="past-performances-label">Past Performances</h3>
+        <div class="performances past">
+          {pastPerformances.map(p => (
+            <div class="performance-row">
+              <span class="performance-date">{fmtDate(p.data.date)}</span>
+              <span class="performance-title">{p.data.title}</span>
+              <span class="performance-venue">{p.data.venue}</span>
+              <span class="performance-cta tba">—</span>
+            </div>
+          ))}
+        </div>
+      </>
+    )}
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <p class="contact-lead">For performances, lessons, and lectures.</p>
+    <a href="mailto:pei.zheng.studio@gmail.com" class="contact-mail">pei.zheng.studio@gmail.com</a>
+  </section>
+
+  <div class="bottom-painting">
+    <img src="/peizheng-guqin/bottom_background.jpg" alt="" role="presentation" />
+  </div>
+
+  <Footer />
+</Base>

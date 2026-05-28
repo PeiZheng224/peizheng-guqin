@@ -1,0 +1,53 @@
+---
+// 顶部导航 + 印章 logo
+interface Props {
+  lang?: 'en' | 'zh';
+}
+const { lang = 'en' } = Astro.props;
+
+const base = import.meta.env.BASE_URL; // '/peizheng-guqin/' in prod, same in dev
+const home = lang === 'zh' ? `${base}zh/` : base;
+
+const labels = {
+  en: {
+    works: 'Works',
+    about: 'About',
+    performances: 'Performances',
+    writings: 'Writings',
+    contact: 'Contact',
+    switchTo: '中',
+    switchHref: `${base}zh/`,
+  },
+  zh: {
+    works: '作品',
+    about: '关于',
+    performances: '演出',
+    writings: '文章',
+    contact: '联系',
+    switchTo: 'EN',
+    switchHref: base,
+  },
+};
+const t = labels[lang];
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href={home} class="nav-brand">
+      <div class="nav-seal" aria-label="印章 鄭沛">
+        <span>鄭</span>
+        <span>沛</span>
+      </div>
+      <span class="nav-name">PEI ZHENG</span>
+    </a>
+    <div class="nav-links">
+      <a href={`${home}#works`}>{t.works}</a>
+      <a href={`${home}#about`}>{t.about}</a>
+      <a href={`${home}#performances`} class="desktop-only">{t.performances}</a>
+      <a href={`${home}#writings`} class="desktop-only">{t.writings}</a>
+      <a href={`${home}#contact`}>{t.contact}</a>
+      <span class="sep desktop-only">·</span>
+      <a href={t.switchHref} class="lang">{t.switchTo}</a>
+    </div>
+  </div>
+</nav>
