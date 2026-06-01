@@ -410,18 +410,21 @@ img, svg {
   margin: 0 auto;
 }
 
-.contact-lead {
-  font-style: italic;
-  font-size: 20px;
-  margin: 0 0 18px;
-  font-family: var(--font-serif-en);
+.contact-poem {
+  font-size: 18px;
+  line-height: 2;
+  margin: 0 0 16px;
+  font-family: var(--font-serif-zh), var(--font-serif-en);
+  color: var(--color-text);
+  letter-spacing: 0.06em;
 }
 
-.contact-mail {
+.contact-poem-attr {
   font-size: 13px;
-  color: var(--color-accent);
-  letter-spacing: 0.08em;
-  font-family: var(--font-serif-en);
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  margin: 0;
+  font-family: var(--font-serif-zh), var(--font-serif-en);
 }
 
 /* ========== Bottom Painting ========== */
