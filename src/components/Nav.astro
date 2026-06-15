@@ -10,19 +10,19 @@ const home = lang === 'zh' ? `${base}zh/` : base;
 
 const labels = {
   en: {
-    works: 'Works',
+    guqin: 'Guqin',
     about: 'About',
-    performances: 'Performances',
-    writings: 'Writings',
+    works: 'Works',
+    events: 'Events',
     contact: 'Contact',
     switchTo: '中',
     switchHref: `${base}zh/`,
   },
   zh: {
-    works: '作品',
+    guqin: '古琴',
     about: '关于',
-    performances: '演出',
-    writings: '文章',
+    works: '作品',
+    events: '活动',
     contact: '联系',
     switchTo: 'EN',
     switchHref: base,
@@ -41,10 +41,10 @@ const t = labels[lang];
       <span class="nav-name">PEI ZHENG</span>
     </a>
     <div class="nav-links">
-      <a href={`${home}#works`}>{t.works}</a>
+      <a href={`${home}#guqin`} class="desktop-only">{t.guqin}</a>
       <a href={`${home}#about`}>{t.about}</a>
-      <a href={`${home}#performances`} class="desktop-only">{t.performances}</a>
-      <a href={`${home}#writings`} class="desktop-only">{t.writings}</a>
+      <a href={`${home}#works`}>{t.works}</a>
+      <a href={`${home}#events`} class="desktop-only">{t.events}</a>
       <a href={`${home}#contact`}>{t.contact}</a>
       <span class="sep desktop-only">·</span>
       <a href={t.switchHref} class="lang">{t.switchTo}</a>

@@ -42,6 +42,49 @@ const fmtDate = (d: Date) =>
 
   <div class="divider"></div>
 
+  <!-- ===== GUQIN ===== -->
+  <section class="section" id="guqin">
+    <div class="section-header">
+      <h2 class="section-title">Guqin</h2>
+      <span></span>
+    </div>
+    <div class="guqin-intro">
+      <p class="guqin-intro-text">
+        The guqin (古琴) is a plucked seven-string instrument with more than three thousand years of history.
+        Revered by scholars and literati, it has long been considered the most refined of Chinese musical arts —
+        a vehicle for contemplation, self-cultivation, and the expression of inner life.
+        In 2003, UNESCO inscribed the guqin tradition on its list of Intangible Cultural Heritage of Humanity.
+      </p>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/S5FMTyYOgEs?start=26"
+          title="Guqin — UNESCO Intangible Cultural Heritage"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section section-narrow" id="about">
+    <h2 class="section-title" style="margin-bottom: 24px;">About</h2>
+    <div class="about-layout">
+      <div class="about-body">
+        <p class="about-text">
+          Pei Zheng is a Guqin performer and educator based in the San Francisco Bay Area. She began her formal study of the Guqin under Teacher Huang Xing, and has advanced her artistry under internationally recognized Mei'an-school master Lui Pui-Yuen (吕培原). She has also received guidance on qin theory from Wu Ruojie, President of the Guizhou Guqin Association. She has presented concerts, lectures, and workshops at universities and cultural institutions across the United States. Zheng is a lifetime member of the Guizhou Guqin Association and founder of the Chinese cultural brand XinEcho. Her work focuses on sharing Guqin music and promoting cross-cultural understanding through performance and education.
+        </p>
+      </div>
+      <div class="about-photo">
+        <img src="/peizheng-guqin/pei-zheng-2.JPG" alt="Pei Zheng playing guqin" />
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ===== WORKS ===== -->
   <section class="section" id="works">
     <div class="section-header">
@@ -73,26 +116,9 @@ const fmtDate = (d: Date) =>
 
   <div class="divider"></div>
 
-  <!-- ===== ABOUT ===== -->
-  <section class="section section-narrow" id="about">
-    <h2 class="section-title" style="margin-bottom: 24px;">About</h2>
-    <div class="about-layout">
-      <div class="about-body">
-        <p class="about-text">
-          Pei Zheng is a Guqin performer and educator based in the San Francisco Bay Area. She began her formal study of the Guqin under Teacher Huang Xing, and has advanced her artistry under internationally recognized Mei'an-school master Lui Pui-Yuen (吕培原). She has also received guidance on qin theory from Wu Ruojie, President of the Guizhou Guqin Association. She has presented concerts, lectures, and workshops at universities and cultural institutions across the United States. Zheng is a lifetime member of the Guizhou Guqin Association and founder of the Chinese cultural brand XinEcho. Her work focuses on sharing Guqin music and promoting cross-cultural understanding through performance and education.
-        </p>
-      </div>
-      <div class="about-photo">
-        <img src="/peizheng-guqin/pei-zheng-2.JPG" alt="Pei Zheng playing guqin" />
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ===== PERFORMANCES ===== -->
-  <section class="section section-narrow" id="performances">
-    <h2 class="section-title" style="margin-bottom: 28px;">Upcoming Performances</h2>
+  <!-- ===== EVENTS ===== -->
+  <section class="section section-narrow" id="events">
+    <h2 class="section-title" style="margin-bottom: 28px;">Upcoming Events</h2>
     <div class="performances">
       {performances.map(p => (
         <div class="performance-row">
@@ -112,7 +138,7 @@ const fmtDate = (d: Date) =>
 
     {pastPerformances.length > 0 && (
       <>
-        <h3 class="past-performances-label">Past Performances</h3>
+        <h3 class="past-events-label">Past Events</h3>
         <div class="performances past">
           {pastPerformances.map(p => (
             <div class="performance-row">

@@ -388,7 +388,7 @@ img, svg {
   color: var(--color-text-faint);
 }
 
-.past-performances-label {
+.past-events-label {
   font-size: var(--fs-meta);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -425,6 +425,36 @@ img, svg {
   letter-spacing: 0.1em;
   margin: 0;
   font-family: var(--font-serif-zh), var(--font-serif-en);
+}
+
+/* ========== Guqin 介绍视频 ========== */
+.guqin-intro {
+  margin-top: 28px;
+}
+
+.guqin-intro-text {
+  font-size: var(--fs-body);
+  line-height: 1.9;
+  max-width: 640px;
+  margin: 0 0 28px;
+  color: var(--color-text-muted);
+}
+
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* ========== Bottom Painting ========== */
