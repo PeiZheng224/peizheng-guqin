@@ -12,12 +12,15 @@ const works = allWorks
   .slice(0, 3);
 
 const allPerformances = await getCollection('performances');
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 const performances = allPerformances
-  .filter(p => p.data.status !== 'past')
+  .filter(p => p.data.date >= today || p.data.status === 'tba')
   .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
 
 const pastPerformances = allPerformances
-  .filter(p => p.data.status === 'past')
+  .filter(p => p.data.date < today && p.data.status !== 'tba')
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const fmtDateZh = (d: Date) => {
