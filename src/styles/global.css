@@ -427,6 +427,21 @@ img, svg {
   font-family: var(--font-serif-zh), var(--font-serif-en);
 }
 
+.contact-email {
+  margin-top: 32px;
+  font-size: var(--fs-meta);
+  letter-spacing: 0.15em;
+  font-family: var(--font-serif-en);
+}
+
+.contact-email a {
+  color: var(--color-text-muted);
+}
+
+.contact-email a:hover {
+  color: var(--color-accent);
+}
+
 /* ========== Guqin 介绍视频 ========== */
 .guqin-intro {
   margin-top: 28px;
